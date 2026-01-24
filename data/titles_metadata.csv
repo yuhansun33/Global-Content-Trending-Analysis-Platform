@@ -1,0 +1,101 @@
+movie_id,title,genre,release_year
+mov_001,Parasite,"Thriller, Drama, Comedy",2019
+mov_002,Mulholland Drive,"Mystery, Thriller, Drama",2001
+mov_003,No Country for Old Men,"Crime, Drama, Thriller",2007
+mov_004,There Will Be Blood,"Drama, History",2007
+mov_005,Interstellar,"Sci-Fi, Adventure, Drama",2014
+mov_006,The Dark Knight,"Action, Crime, Drama, Thriller",2008
+mov_007,Mad Max: Fury Road,"Action, Adventure, Sci-Fi, Thriller",2015
+mov_008,Spirited Away,"Animation, Adventure, Fantasy, Family",2001
+mov_009,Eternal Sunshine of the Spotless Mind,"Romance, Sci-Fi, Drama",2004
+mov_010,The Social Network,"Biography, Drama",2010
+mov_011,Inglourious Basterds,"War, Action, Drama, Adventure",2009
+mov_012,In the Mood for Love,"Romance, Drama",2000
+mov_013,Everything Everywhere All at Once,"Action, Adventure, Comedy, Sci-Fi",2022
+mov_014,The LotR: The Fellowship of the Ring,"Fantasy, Adventure, Action, Drama",2001
+mov_015,The LotR: The Return of the King,"Fantasy, Adventure, Action, Drama",2003
+mov_016,La La Land,"Musical, Romance, Drama, Comedy",2016
+mov_017,Get Out,"Horror, Mystery, Thriller",2017
+mov_018,Moonlight,"Drama, Romance",2016
+mov_019,Whiplash,"Drama, Music",2014
+mov_020,Arrival,"Sci-Fi, Drama, Mystery",2016
+mov_021,Children of Men,"Sci-Fi, Thriller, Drama, Adventure",2006
+mov_022,The Grand Budapest Hotel,"Comedy, Adventure, Crime",2014
+mov_023,Oppenheimer,"Biography, History, Drama",2023
+mov_024,Inception,"Sci-Fi, Action, Adventure, Thriller",2010
+mov_025,The Departed,"Crime, Drama, Thriller",2006
+mov_026,Portrait of a Lady on Fire,"Romance, Drama, History",2019
+mov_027,Dune: Part Two,"Sci-Fi, Adventure, Action, Drama",2024
+mov_028,The Royal Tenenbaums,"Comedy, Drama",2001
+mov_029,Once Upon a Time… in Hollywood,"Comedy, Drama",2019
+mov_030,Brokeback Mountain,"Romance, Drama, Western",2005
+mov_031,Before Sunset,"Romance, Drama",2004
+mov_032,Lost in Translation,"Comedy, Drama, Romance",2003
+mov_033,Gladiator,"Action, Adventure, Drama, History",2000
+mov_034,Spider-Man: Into the Spider-Verse,"Animation, Action, Adventure, Sci-Fi",2018
+mov_035,Aftersun,"Drama",2022
+mov_036,Lady Bird,"Comedy, Drama",2017
+mov_037,City of God,"Crime, Drama",2002
+mov_038,Call Me by Your Name,"Romance, Drama",2017
+mov_039,Pan’s Labyrinth,"Fantasy, War, Drama",2006
+mov_040,Oldboy,"Action, Mystery, Thriller, Drama",2003
+mov_041,Zodiac,"Crime, Mystery, Thriller, Drama",2007
+mov_042,Little Miss Sunshine,"Comedy, Drama",2006
+mov_043,The LotR: The Two Towers,"Fantasy, Adventure, Action, Drama",2002
+mov_044,WALL·E,"Animation, Sci-Fi, Adventure, Family",2008
+mov_045,Phantom Thread,"Drama, Romance",2017
+mov_046,Amélie,"Comedy, Romance",2001
+mov_047,Past Lives,"Romance, Drama",2023
+mov_048,Kill Bill: Vol. 1,"Action, Crime, Thriller",2003
+mov_049,Memories of Murder,"Crime, Thriller, Mystery, Drama",2003
+mov_050,Pride & Prejudice,"Romance, Drama",2005
+mov_051,Almost Famous,"Comedy, Drama, Music",2000
+mov_052,Sinners,"Horror, Thriller, Drama, Mystery",2025
+mov_053,Superbad,"Comedy",2007
+mov_054,The Wolf of Wall Street,"Biography, Comedy, Crime, Drama",2013
+mov_055,Y tu mamá también,"Drama, Romance, Adventure",2001
+mov_056,The Zone of Interest,"War, Drama, History",2023
+mov_057,Ocean’s Eleven,"Crime, Thriller",2001
+mov_058,Ratatouille,"Animation, Comedy, Adventure, Family",2007
+mov_059,Django Unchained,"Western, Action, Drama",2012
+mov_060,Little Women,"Drama, Romance",2019
+mov_061,Memento,"Mystery, Thriller",2000
+mov_062,Hereditary,"Horror, Drama, Mystery, Thriller",2018
+mov_063,Blade Runner 2049,"Sci-Fi, Thriller, Action, Drama",2017
+mov_064,Her,"Romance, Sci-Fi, Drama",2013
+mov_065,Fantastic Mr. Fox,"Animation, Adventure, Comedy, Family",2009
+mov_066,O Brother Where Art Thou?,"Comedy, Adventure, Crime, Music",2000
+mov_067,The Handmaiden,"Thriller, Romance, Drama",2016
+mov_068,Tár,"Drama, Music",2022
+mov_069,Yi Yi,"Drama, Romance",2000
+mov_070,The Florida Project,"Drama",2017
+mov_071,The Tree of Life,"Drama, Fantasy",2011
+mov_072,Uncut Gems,"Crime, Thriller, Drama, Comedy",2019
+mov_073,Spotlight,"Biography, Drama, History",2015
+mov_074,Black Swan,"Thriller, Drama",2010
+mov_075,Boyhood,"Drama",2014
+mov_076,The Worst Person in the World,"Romance, Comedy, Drama",2021
+mov_077,The Prestige,"Sci-Fi, Thriller, Drama, Mystery",2006
+mov_078,Michael Clayton,"Thriller, Drama, Crime, Mystery",2007
+mov_079,Gone Girl,"Thriller, Mystery, Drama, Crime",2014
+mov_080,Anatomy of a Fall,"Thriller, Drama, Crime",2023
+mov_081,Crouching Tiger Hidden Dragon,"Action, Romance, Adventure, Fantasy",2000
+mov_082,Mean Girls,"Comedy",2004
+mov_083,Perfect Days,"Drama",2023
+mov_084,Barbie,"Comedy, Adventure, Fantasy",2023
+mov_085,Up,"Animation, Adventure, Comedy, Family",2009
+mov_086,Dune: Part One,"Sci-Fi, Adventure, Action, Drama",2021
+mov_087,The Master,"Drama",2012
+mov_088,Top Gun: Maverick,"Action, Drama",2022
+mov_089,Drive My Car,"Drama",2021
+mov_090,Bridesmaids,"Comedy, Romance",2011
+mov_091,Knives Out,"Mystery, Comedy, Crime, Drama",2019
+mov_092,The Incredibles,"Animation, Action, Adventure, Family",2004
+mov_093,Killers of the Flower Moon,"Crime, Drama, History, Western",2023
+mov_094,Moneyball,"Biography, Drama, Sport",2011
+mov_095,Inside Llewyn Davis,"Drama, Music",2013
+mov_096,Howl’s Moving Castle,"Animation, Fantasy, Adventure, Family",2004
+mov_097,The Lighthouse,"Horror, Fantasy, Drama, Mystery",2019
+mov_098,The Holdovers,"Comedy, Drama",2023
+mov_099,Midsommar,"Horror, Drama, Mystery, Thriller",2019
+mov_100,Avengers: Endgame,"Action, Sci-Fi, Adventure, Drama",2019
