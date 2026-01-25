@@ -4,6 +4,7 @@ import random
 import time
 from datetime import datetime
 from pathlib import Path
+
 from kafka import KafkaProducer
 from kafka.admin import KafkaAdminClient, NewTopic
 from kafka.errors import TopicAlreadyExistsError

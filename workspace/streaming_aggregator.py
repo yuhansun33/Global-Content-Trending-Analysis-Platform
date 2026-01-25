@@ -1,10 +1,21 @@
 import os
+
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import (
-    from_json, col, window, sum as spark_sum, explode, split, current_timestamp
+    col,
+    current_timestamp,
+    explode,
+    from_json,
+    split,
+    window,
 )
+from pyspark.sql.functions import sum as spark_sum
 from pyspark.sql.types import (
-    StructType, StructField, StringType, DoubleType, TimestampType
+    DoubleType,
+    StringType,
+    StructField,
+    StructType,
+    TimestampType,
 )
 
 # Configuration from environment variables
