@@ -1,2 +1,34 @@
+# Environment & Secrets
 .env
-# data/
+.env.local
+*.pem
+*.key
+credentials/
+*-service-account.json
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.uv/
+
+# Logs
+logs/
+*.log
+*.pid
+
+# IDE
+.idea/
+.vscode/
+*.swp
+.DS_Store
+
+# Spark
+spark-warehouse/
+metastore_db/
+spark-checkpoints/
+
+# Testing
+.pytest_cache/
+.coverage
+gcp-key.json
