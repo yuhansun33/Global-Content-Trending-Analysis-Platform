@@ -24,10 +24,7 @@ def load_movie_metadata():
     with open(METADATA_PATH, newline="", encoding="utf-8") as f:
         reader = csv.DictReader(f)
         for row in reader:
-            movies.append({
-                "movie_id": row["movie_id"],
-                "genre": row["genre"]
-            })
+            movies.append({"movie_id": row["movie_id"], "genre": row["genre"]})
     return movies
 
 
@@ -51,7 +48,7 @@ def generate_viewing_event(movies):
         "country": random.choices(COUNTRIES, weights=COUNTRY_WEIGHTS)[0],
         "genre": movie["genre"],
         "watch_hours": round(random.uniform(0.1, 3.0), 2),
-        "timestamp": datetime.utcnow().isoformat()
+        "timestamp": datetime.utcnow().isoformat(),
     }
 
 
@@ -63,7 +60,7 @@ def main():
 
     producer = KafkaProducer(
         bootstrap_servers=KAFKA_BROKER,
-        value_serializer=lambda v: json.dumps(v).encode("utf-8")
+        value_serializer=lambda v: json.dumps(v).encode("utf-8"),
     )
 
     print(f"Sending messages to '{TOPIC_NAME}'... (Ctrl+C to stop)")
