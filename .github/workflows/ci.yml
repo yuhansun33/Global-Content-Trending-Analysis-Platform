@@ -112,14 +112,14 @@ jobs:
         run: docker compose down
 
   # ===========================================================================
-  # Deploy (only on main branch)
+  # Deploy (only on main branch push, skipped for PRs)
   # ===========================================================================
   deploy:
     name: Deploy to Production
     runs-on: ubuntu-latest
     needs: [integration-test]
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-    environment: production
+    # environment: production  # Uncomment when you have AWS secrets configured
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
