@@ -1,20 +1,26 @@
-version: '3.8'
+# =============================================================================
+# Kafka + Spark Stack (Local / AWS EC2)
+# =============================================================================
+# Usage:
+#   Local:  docker compose up -d
+#   AWS:    export KAFKA_EXTERNAL_HOST=<EC2-PUBLIC-IP> && docker compose up -d
+# =============================================================================
 
 services:
   zookeeper:
     image: confluentinc/cp-zookeeper:7.5.0
     container_name: zookeeper
+    restart: unless-stopped
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
-    ports:
-      - "2181:2181"
     networks:
       - data-platform
 
   kafka:
     image: confluentinc/cp-kafka:7.5.0
     container_name: kafka
+    restart: unless-stopped
     depends_on:
       - zookeeper
     ports:
@@ -23,51 +29,32 @@ services:
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
-      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      # KAFKA_EXTERNAL_HOST: set to EC2 public IP for remote producer access
+      KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka:9092,EXTERNAL://${KAFKA_EXTERNAL_HOST:-localhost}:29092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT
+      KAFKA_LISTENERS: INTERNAL://0.0.0.0:9092,EXTERNAL://0.0.0.0:29092
+      KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
     networks:
       - data-platform
 
-  spark-master:
-    image: tabulario/spark-iceberg:3.5.1_1.5.2
-    container_name: spark-master
+  spark:
+    image: apache/spark:3.5.3-python3
+    container_name: spark
     environment:
-      - SPARK_MODE=master
-      - SPARK_MASTER_HOST=spark-master
-      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID:-your_access_key_here}
-      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY:-your_secret_key_here}
-      - AWS_REGION=${AWS_REGION:-us-east-1}
+      - SPARK_NO_DAEMONIZE=true
+      - GOOGLE_APPLICATION_CREDENTIALS=/opt/spark/conf/gcp-key.json
+      # Kafka broker - change to remote IP for distributed deployment
+      - KAFKA_BROKER=${KAFKA_BROKER:-kafka:9092}
     ports:
-      - "8080:8080"
-      - "7077:7077"
+      - "4040:4040"
     volumes:
-      - ./workspace:/home/iceberg/workspace
-      - ./data:/home/iceberg/data
+      - ./workspace:/opt/spark/work-dir/workspace
+      - ./data:/opt/spark/work-dir/data
+      - ./gcp-key.json:/opt/spark/conf/gcp-key.json:ro
     networks:
       - data-platform
-
-  spark-worker:
-    image: tabulario/spark-iceberg:3.5.1_1.5.2
-    container_name: spark-worker
-    depends_on:
-      - spark-master
-    environment:
-      - SPARK_MODE=worker
-      - SPARK_MASTER_URL=spark://spark-master:7077
-      - SPARK_WORKER_MEMORY=2g
-      - SPARK_WORKER_CORES=2
-      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID:-your_access_key_here}
-      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY:-your_secret_key_here}
-      - AWS_REGION=${AWS_REGION:-us-east-1}
-    ports:
-      - "8081:8081"
-    volumes:
-      - ./workspace:/home/iceberg/workspace
-      - ./data:/home/iceberg/data
-    networks:
-      - data-platform
+    command: ["tail", "-f", "/dev/null"]
 
   jupyter:
     image: jupyter/pyspark-notebook:latest
