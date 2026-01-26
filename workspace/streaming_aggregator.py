@@ -55,14 +55,16 @@ def write_to_bigquery(batch_df, batch_id):
     gcp_credentials = os.getenv("GOOGLE_APPLICATION_CREDENTIALS", "")
     row_count = batch_df.count()
     if row_count > 0:
-        (
+        writer = (
             batch_df.write.format("bigquery")
             .option("table", f"{GCP_PROJECT}.{BQ_DATASET}.{BQ_TABLE}")
             .option("credentialsFile", gcp_credentials)
             .option("writeMethod", "direct")
-            .mode("append")
-            .save()
         )
+        # Use GCS temp bucket if provided (for indirect write method fallback)
+        if GCS_TEMP_BUCKET:
+            writer = writer.option("temporaryGcsBucket", GCS_TEMP_BUCKET)
+        writer.mode("append").save()
         print(f"Batch {batch_id}: Wrote {row_count} rows to BigQuery")
 
 
