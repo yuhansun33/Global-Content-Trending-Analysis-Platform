@@ -41,7 +41,9 @@ services:
   spark:
     image: apache/spark:3.5.3-python3
     container_name: spark
-    env_file: .env
+    env_file:
+      - path: .env
+        required: false
     environment:
       - SPARK_NO_DAEMONIZE=true
       - GOOGLE_APPLICATION_CREDENTIALS=/opt/spark/conf/gcp-key.json
