@@ -15,5 +15,5 @@ echo "=============================================="
 
 docker exec spark /opt/spark/bin/spark-submit \
   --conf spark.jars.ivy=/tmp/.ivy2 \
-  --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.3 \
+  --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.3,com.google.cloud.spark:spark-bigquery-with-dependencies_2.12:0.36.1 \
   /opt/spark/work-dir/workspace/streaming_aggregator.py
