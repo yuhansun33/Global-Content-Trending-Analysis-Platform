@@ -4,15 +4,41 @@ A real-time streaming analytics platform that simulates Netflix viewing patterns
 
 ## Architecture
 
+```mermaid
+flowchart LR
+    subgraph On-Premise["On-Premise (School Server)"]
+        Producer["Producer\n(Python)"]
+    end
+
+    subgraph AWS["AWS EC2"]
+        Kafka["Apache Kafka\n(Message Queue)"]
+        Spark["Spark Streaming\n(Aggregator)"]
+    end
+
+    subgraph GCP["Google Cloud"]
+        BigQuery["BigQuery\n(Data Warehouse)"]
+    end
+
+    Producer -->|"Events\n(2-5/batch)"| Kafka
+    Kafka -->|"viewing_events\ntopic"| Spark
+    Spark -->|"1-min windows"| BigQuery
 ```
-┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
-│   Producer      │     │   Apache Kafka  │     │  Spark Streaming│     │  Google BigQuery│
-│  (On-Premise)   │────▶│    (AWS EC2)    │────▶│   (AWS EC2)     │────▶│     (GCP)       │
-│                 │     │                 │     │                 │     │                 │
-│ - Simulates     │     │ - Message Queue │     │ - Watermarking  │     │ - Data Warehouse│
-│   viewing events│     │ - 3 Partitions  │     │ - Windowed Agg  │     │ - Analytics     │
-│ - Peak hours    │     │ - Distributed   │     │ - Genre Explode │     │ - Dashboards    │
-└─────────────────┘     └─────────────────┘     └─────────────────┘     └─────────────────┘
+
+### Data Flow
+
+```mermaid
+flowchart TD
+    A[Generate Event] --> B{Peak Hour?}
+    B -->|Yes| C[Country Weight × 3]
+    B -->|No| D[Country Weight × 1]
+    C --> E[Select Country]
+    D --> E
+    E --> F[Random Movie + Watch Hours]
+    F --> G[Send to Kafka]
+    G --> H[Spark Consumes]
+    H --> I[Explode Genres]
+    I --> J[Window Aggregation]
+    J --> K[Write to BigQuery]
 ```
 
 ## Features
@@ -107,27 +133,50 @@ The producer simulates realistic viewing patterns using **timezone-aware country
 
 ## CI/CD Pipeline
 
+```mermaid
+flowchart LR
+    A[Push/PR] --> B[Lint]
+    B --> C[Test]
+    C --> D[Docker Build]
+    D --> E[Integration Test]
+```
+
 The GitHub Actions workflow (`.github/workflows/ci.yml`) includes:
 
 1. **Lint**: Ruff linting and formatting check
 2. **Test**: Pytest unit tests
 3. **Docker Build**: Multi-stage image builds
 4. **Integration Test**: Kafka connectivity test
-5. **Deploy**: Placeholder for production deployment
 
 ## Watermarking Explained
 
 The streaming aggregator uses a **10-minute watermark** to handle late-arriving events:
 
+```mermaid
+gantt
+    title Event Timeline with Watermarking
+    dateFormat mm:ss
+    axisFormat %M:%S
+
+    section Window 1
+    Window (00:00-01:00)     :w1, 00:00, 1m
+    Watermark buffer         :crit, 01:00, 10m
+
+    section Events
+    On-time event            :e1, 00:30, 5s
+    Late event (accepted)    :e2, 01:05, 5s
+    Late event (dropped)     :done, e3, 11:30, 5s
 ```
-Events may arrive out of order due to:
+
+**Why events arrive late:**
 - Network latency
 - Mobile device connectivity issues
 - International routing delays
 
-Watermark trade-off:
-- Too short: Drops late events (inaccurate metrics)
-- Too long: Delays window closure (higher memory usage)
-- 10 minutes: Balances accuracy vs. freshness for dashboard use
-```
+**Watermark trade-off:**
+| Setting | Pros | Cons |
+|---------|------|------|
+| Too short | Fast output | Drops late events |
+| Too long | More accurate | High memory usage |
+| **10 minutes** | Balanced | Good for dashboards |
 
