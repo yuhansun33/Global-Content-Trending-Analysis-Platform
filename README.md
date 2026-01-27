@@ -7,16 +7,20 @@ A real-time streaming analytics platform that simulates Netflix viewing patterns
 ```mermaid
 flowchart LR
     subgraph On-Premise["Server"]
-        Producer[Producer]
+        Producer["Producer
+        Viewing Events"]
     end
 
     subgraph AWS["AWS EC2"]
-        Kafka[Apache Kafka]
-        Spark[Spark Streaming]
+        Kafka["Apache Kafka
+        Message Queue"]
+        Spark["Spark Streaming
+        Aggregator"]
     end
 
     subgraph GCP["Google Cloud"]
-        BigQuery[BigQuery]
+        BigQuery["BigQuery
+        Data Warehouse"]
     end
 
     Producer -->|events| Kafka
