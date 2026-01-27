@@ -30,7 +30,7 @@ A real-time streaming analytics platform that simulates Netflix viewing patterns
 - **Dual Output Mode**: Console (development) or BigQuery (production)
 
 ### Infrastructure
-- **Docker Compose**: Separate configurations for local dev, AWS Kafka, and Spark deployment
+- **Docker Compose**: Unified configuration for local dev and AWS EC2
 - **CI/CD Pipeline**: GitHub Actions for linting, testing, building, and deployment
 - **UV Package Manager**: Modern Python dependency management
 
@@ -43,8 +43,8 @@ A real-time streaming analytics platform that simulates Netflix viewing patterns
 ├── data/
 │   └── titles_metadata.csv      # Movie metadata (Top 100 movies)
 ├── scripts/
-│   ├── run_all.sh               # Start entire pipeline
-│   └── stop_all.sh              # Stop entire pipeline
+│   ├── run_producer.sh          # Run producer (on-premise)
+│   └── run_spark.sh             # Run Spark job (EC2)
 ├── tests/
 │   └── test_producer.py         # Unit tests
 ├── docker-compose.yml           # Kafka + Spark stack (local & AWS)
